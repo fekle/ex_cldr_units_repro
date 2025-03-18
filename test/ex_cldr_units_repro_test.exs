@@ -5,43 +5,67 @@ defmodule ExCldrUnitsReproTest do
 
   doctest ExCldrUnitsRepro
 
-  # This fails - the J should be uppercase
-  test "32 kilojoules is formatted correctly" do
-    assert Cldr.Unit.to_string!(32, unit: :kilojoule, locale: :de, style: :short) == "32 kJ"
+  describe "kilojoules formatting" do
+    test "formats kilojoules in German locale" do
+      assert Cldr.Unit.to_string!(1, unit: :kilojoule, locale: :de, style: :short) == "1 kJ"
+    end
 
-    assert Cldr.Unit.to_string!(32, unit: :kilojoule, locale: :en, style: :short) == "32 kJ"
+    test "formats kilojoules in English locale" do
+      assert Cldr.Unit.to_string!(2, unit: :kilojoule, locale: :en, style: :short) == "2 kJ"
+    end
   end
 
-  # This fails
-  test "32 megajoules is formatted correctly" do
-    assert Cldr.Unit.to_string!(32, unit: :megajoule, locale: :de, style: :short) == "32 MJ"
+  describe "megajoules formatting" do
+    test "formats megajoules in German locale" do
+      assert Cldr.Unit.to_string!(1, unit: :megajoule, locale: :de, style: :short) == "1 MJ"
+    end
 
-    assert Cldr.Unit.to_string!(32, unit: :megajoule, locale: :en, style: :short) == "32 MJ"
+    test "formats megajoules in English locale" do
+      assert Cldr.Unit.to_string!(2, unit: :megajoule, locale: :en, style: :short) == "2 MJ"
+    end
   end
 
-  # This fails
-  test "Unit name kilojoule is formatted correctly" do
-    assert Cldr.Unit.display_name(:kilojoule, locale: :de) == "Kilojoule"
+  describe "unit name formatting" do
+    test "formats kilojoule name in German locale" do
+      assert Cldr.Unit.display_name(:kilojoule, locale: :de) == "Kilojoule"
+    end
 
-    assert Cldr.Unit.display_name(:kilojoule, locale: :en) == "kilojoules"
+    test "formats kilojoule name in English locale" do
+      assert Cldr.Unit.display_name(:kilojoule, locale: :en) == "kilojoules"
+    end
+
+    test "formats megajoule name in German locale" do
+      assert Cldr.Unit.display_name(:megajoule, locale: :de) == "Megajoule"
+    end
+
+    test "formats megajoule name in English locale" do
+      assert Cldr.Unit.display_name(:megajoule, locale: :en) == "megajoules"
+    end
   end
 
-  # This fails
-  test "Unit name megajoule is formatted correctly" do
-    assert Cldr.Unit.display_name(:megajoule, locale: :de) == "Megajoule"
+  describe "data unit formatting" do
+    test "formats megabytes in German locale" do
+      assert Cldr.Unit.to_string!(1, unit: :megabyte, locale: :de, style: :narrow) == "1 MB"
+    end
 
-    assert Cldr.Unit.display_name(:megajoule, locale: :en) == "megajoules"
-  end
+    test "formats kilobytes in German locale" do
+      assert Cldr.Unit.to_string!(2, unit: :kilobyte, locale: :de, style: :narrow) == "2 kB"
+    end
 
-  # This fails - Bytes are formatted like bits; the B should be uppercase.
-  # When using narrow style, megabit should be Mb with a lowercase b, not the current "Mbit."
-  test "Megabytes, kilobytes, and megabits are formatted correctly" do
-    assert Cldr.Unit.to_string!(32, unit: :megabyte, locale: :de, style: :narrow) == "32 MB"
-    assert Cldr.Unit.to_string!(32, unit: :kilobyte, locale: :de, style: :narrow) == "32 kB"
-    assert Cldr.Unit.to_string!(32, unit: :megabit, locale: :de, style: :narrow) == "32 Mb"
+    test "formats megabits in German locale" do
+      assert Cldr.Unit.to_string!(3, unit: :megabit, locale: :de, style: :narrow) == "3 Mb"
+    end
 
-    assert Cldr.Unit.to_string!(32, unit: :megabyte, locale: :en, style: :narrow) == "32 MB"
-    assert Cldr.Unit.to_string!(32, unit: :kilobyte, locale: :en, style: :narrow) == "32 kB"
-    assert Cldr.Unit.to_string!(32, unit: :megabit, locale: :en, style: :narrow) == "32 Mb"
+    test "formats megabytes in English locale" do
+      assert Cldr.Unit.to_string!(4, unit: :megabyte, locale: :en, style: :narrow) == "4 MB"
+    end
+
+    test "formats kilobytes in English locale" do
+      assert Cldr.Unit.to_string!(5, unit: :kilobyte, locale: :en, style: :narrow) == "5 kB"
+    end
+
+    test "formats megabits in English locale" do
+      assert Cldr.Unit.to_string!(6, unit: :megabit, locale: :en, style: :narrow) == "6 Mb"
+    end
   end
 end
