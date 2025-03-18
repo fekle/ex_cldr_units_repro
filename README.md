@@ -4,10 +4,11 @@ Reproduction repository for https://github.com/elixir-cldr/cldr_units/issues/48.
 
 Just install dependencies and run `mix test`.
 
-```
+## Test Run
+
+```elixir
 Running ExUnit with seed: 0, max_cases: 20
 
-..
 
   1) test megajoules formatting formats megajoules in German locale (ExCldrUnitsReproTest)
      test/ex_cldr_units_repro_test.exs:19
@@ -29,7 +30,6 @@ Running ExUnit with seed: 0, max_cases: 20
      stacktrace:
        test/ex_cldr_units_repro_test.exs:24: (test)
 
-..
 
   3) test unit name formatting formats megajoule name in German locale (ExCldrUnitsReproTest)
      test/ex_cldr_units_repro_test.exs:37
@@ -62,7 +62,6 @@ Running ExUnit with seed: 0, max_cases: 20
      stacktrace:
        test/ex_cldr_units_repro_test.exs:48: (test)
 
-..
 
   6) test data unit formatting formats megabytes in English locale (ExCldrUnitsReproTest)
      test/ex_cldr_units_repro_test.exs:59
@@ -100,7 +99,7 @@ Finished in 0.08 seconds (0.00s async, 0.08s sync)
 14 tests, 8 failures
 ```
 
-Comments:
+## Comments:
 
 - 1: For some reason, Megajoule in German has a non-breakable space (Unicode \u00A0) between the number and unit. While I think that makes sense, it seems inconsistent with the other formatters. (For example, English Megajoule has a normal space, as does German kilojoule.)
 - 1,2: Megajoule should have a big J like kilojoule.
